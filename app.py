@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, jsonify
 import xgboost as xgb
 import joblib
@@ -9,7 +10,7 @@ app = Flask(__name__)
 # Load model and preprocessor
 model = xgb.XGBClassifier()
 model.load_model('readmission_model.json')
-prep = joblib.load('preprocessor.pkl')
+prep = joblib.load('preprocessor_fixed.pkl')  # Use the fixed preprocessor
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -52,4 +53,5 @@ def features():
     return jsonify(expected_features)
 
 if __name__ == '__main__': 
-    app.run(host='0.0.0.0', port=5000, debug=False)
+    port = int(os.environ.get('PORT', 5000))  # Railway provides PORT
+    app.run(host='0.0.0.0', port=port, debug=False)

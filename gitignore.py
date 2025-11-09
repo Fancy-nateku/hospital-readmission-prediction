@@ -5,13 +5,14 @@
 *.onnx
 
 # Python
-_pycache_/
+__pycache__/
 *.py[cod]
 *$py.class
 
 # Environments
 .env
 .venv
+hospital_env/
 
 # IDE
 .vscode/
@@ -19,3 +20,4 @@ _pycache_/
 
 # OS
 .DS_Store
+Thumbs.db
